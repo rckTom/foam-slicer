@@ -1,0 +1,143 @@
+/* SPDX-License-Identifier: GPL-3.0-only
+ *
+ * A quiet workbench: neutral greys, so the colours that mean something stand
+ * out. Red is what the laser cuts, blue what it engraves (the colours of the
+ * exported files), amber a loose piece to place by hand, magenta a piece with
+ * nothing under it.
+ */
+
+:root {
+  --bg: #f4f4f2;
+  --panel: #ffffff;
+  --panel-2: #f0f0ed;
+  --line: #dcdcd7;
+  --line-2: #c6c6c0;
+  --ink: #1d1e20;
+  --ink-2: #5d5f63;
+  --ink-3: #8b8d91;
+  --accent: #1d1e20;
+  --sheet: #d5d7db;         /* main piece */
+  --sheet-2: #bfc2c8;       /* alternate sheets in 3D */
+  --sheet-edge: #8d9097;
+  --cut: #d93a2b;
+  --engrave: #2463d1;
+  --loose: #e08a12;
+  --float: #c2338f;
+  --plane: #2463d1;
+  --sel: #1d1e20;
+  --mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161719;
+    --panel: #1e1f22;
+    --panel-2: #26272b;
+    --line: #313237;
+    --line-2: #43454b;
+    --ink: #ecebe7;
+    --ink-2: #a3a4a8;
+    --ink-3: #6f7075;
+    --accent: #ecebe7;
+    --sheet: #474a52;
+    --sheet-2: #3a3c43;
+    --sheet-edge: #6e717a;
+    --cut: #ff6a5c;
+    --engrave: #6aa5ff;
+    --loose: #f2a93b;
+    --float: #ec6fc0;
+    --plane: #6aa5ff;
+    --sel: #ffffff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161719;
+  --panel: #1e1f22;
+  --panel-2: #26272b;
+  --line: #313237;
+  --line-2: #43454b;
+  --ink: #ecebe7;
+  --ink-2: #a3a4a8;
+  --ink-3: #6f7075;
+  --accent: #ecebe7;
+  --sheet: #474a52;
+  --sheet-2: #3a3c43;
+  --sheet-edge: #6e717a;
+  --cut: #ff6a5c;
+  --engrave: #6aa5ff;
+  --loose: #f2a93b;
+  --float: #ec6fc0;
+  --plane: #6aa5ff;
+  --sel: #ffffff;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 14px/1.45 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#app { height: 100%; }
+
+button, input, select { font: inherit; color: inherit; }
+
+button {
+  border: 1px solid var(--line-2);
+  background: var(--panel);
+  border-radius: 6px;
+  padding: 5px 11px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+button:hover:not(:disabled) { border-color: var(--ink-3); }
+button:disabled { opacity: 0.45; cursor: default; }
+button.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+button.ghost { border-color: transparent; background: transparent; }
+button.ghost:hover:not(:disabled) { background: var(--panel-2); border-color: transparent; }
+
+input[type="number"], select {
+  border: 1px solid var(--line-2);
+  background: var(--panel);
+  border-radius: 6px;
+  padding: 4px 7px;
+  width: 76px;
+  font-variant-numeric: tabular-nums;
+}
+input[type="checkbox"] { accent-color: var(--accent); margin: 0; }
+input[type="range"] { accent-color: var(--accent); }
+
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--ink-2); }
+.faint { color: var(--ink-3); }
+
+.seg { display: inline-flex; border: 1px solid var(--line-2); border-radius: 6px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; padding: 4px 10px; background: var(--panel); }
+.seg button + button { border-left: 1px solid var(--line-2); }
+.seg button.on { background: var(--accent); color: var(--bg); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11.5px; font-weight: 600;
+  padding: 0 7px; height: 19px; border-radius: 10px;
+  background: var(--panel-2); color: var(--ink-2);
+  white-space: nowrap;
+}
+.chip.loose { background: color-mix(in srgb, var(--loose) 18%, transparent); color: var(--loose); }
+.chip.floating, .chip.warn { background: color-mix(in srgb, var(--float) 16%, transparent); color: var(--float); }
+.chip.main { background: var(--panel-2); color: var(--ink-2); }
+
+.dot { width: 9px; height: 9px; border-radius: 2px; display: inline-block; flex: none; }
+
+@media print {
+  body { background: #fff; color: #000; }
+}

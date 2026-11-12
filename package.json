@@ -1,0 +1,28 @@
+{
+  "name": "foam-slicer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "typecheck": "vue-tsc -b",
+    "check": "esbuild scripts/check.ts --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/check.mjs && node node_modules/.cache/check.mjs",
+    "nestcheck": "esbuild scripts/nestcheck.ts --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/nestcheck.mjs && node node_modules/.cache/nestcheck.mjs"
+  },
+  "dependencies": {
+    "fflate": "^0.8.3",
+    "replicad-opencascadejs": "^1.2.1",
+    "three": "^0.187.0",
+    "vue": "^3.5.45"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/three": "^0.187.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "typescript": "~5.7.2",
+    "vite": "^6.4.6",
+    "vue-tsc": "^2.2.12"
+  }
+}
